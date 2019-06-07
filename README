@@ -1,0 +1,77 @@
+
+
+ # Some info on how to use these tools.
+
+
+ ## run_exp.py
+
+ Run measurements and/or training/testing
+ 
+ Command line args:
+  * demo - run demo on small network
+  * measure - run measurements with specified parameters
+  * train - run training using measured data (use together with measure or specify model parameters using load arg)
+  * test - run subset of test set through circuit (use together with load)
+  * rndseed=42 - specify numpy rng seed
+  * dataset=data/datasets/<my-dataset>.pkz - specify which dataset to use
+  * single=n - only run the nth measurement
+  * load=data/measured/<my-measurement>.npy - load set of measurements to be used in training
+  * params=data/devparams/<my-params>.pkl - device params to be used in simulation
+  * numthreads=8 - number of threads to be used
+  * N=196x49x10 - network dimensions
+  * numtest=50 - number of test set samples to run
+
+ Example use cases:
+
+ Start automatic parameter extraction
+ $ python run_exp.py measure
+
+ Start training
+ $ python run_exp.py train
+
+ Use specific model parameters for training
+ $ python run_exp.py train load=data/<your-measurement-data>.npy
+
+ Test trained network
+ $ python run_exp.py train test load=data/<your-measurement-data>.npy
+ 
+
+
+ ## run_single.py
+
+ Run transient simulation
+
+ Command line args:
+  * rndseed=42 - numpy random seed
+  * N=196x49x10 - network dimensions
+  * inp=100 - maximum input current to be applied to input nodes (in nA)
+  * input1=1 - input pattern 1 from dataset
+  * input2=2 - input pattern 2 from dataset
+  * weights=data/weights/<my-weights>.npy - set of weights to be used in simulation
+  * params=data/devparams/<my-params>.pkl - device params to be used in simulation
+  * dataset=data/datasets/<my-dataset>.pkz - specify which dataset to use
+
+ $ python run_single.py rndseed=42 N=196x49x10 inp=200 datasets=data/datasets/mnist_14x14.pkl.gz weights=data/weights/weights_clipped_regtest.npy params=data/devparams/params_mnist14_-5185923438954998828.pkl inpat1=21 inpat2=121
+
+
+
+ ## analysis.py
+
+ Run analysis (plot/print output)
+
+ Command line args:
+  * noplot - do not plot output (used for batch processing)
+  * noprint - do not print verbose output message (used for batch processing)
+
+ $ python analysis.py data/analysis/<my-transient-data>.out.npy
+
+
+
+ ## cat_exp.py
+
+ Concatenate measurement files to obtain one data file
+ (single input measurements have to be available in data/cache dir)
+
+ $ python cat_exp.py
+
+

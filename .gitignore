@@ -1,0 +1,9 @@
+/*.pdf
+/*.log
+/*.swp
+/*.pyc
+/*.png
+/*data/cache
+/*figs
+/data/tmp
+/data/datasets
